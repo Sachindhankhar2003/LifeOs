@@ -1,6 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect } from "react";
+import { useTheme } from "next-themes";
 
 type UserContextType = {
   name: string;
@@ -18,6 +19,8 @@ type UserContextType = {
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export function UserProvider({ children }: { children: React.ReactNode }) {
+  const { theme, setTheme } = useTheme();
+  
   const [name, setNameState] = useState("Sachin");
   const [email, setEmailState] = useState("sachin@lifeos.app");
   const [age, setAgeState] = useState("23");
@@ -30,28 +33,20 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     const savedEmail = localStorage.getItem("lifeos_email");
     const savedAge = localStorage.getItem("lifeos_age");
     const savedLocation = localStorage.getItem("lifeos_location");
-    const savedTheme = localStorage.getItem("lifeos_theme");
 
     if (savedName) setNameState(savedName);
     if (savedEmail) setEmailState(savedEmail);
     if (savedAge) setAgeState(savedAge);
     if (savedLocation) setLocationState(savedLocation);
-    if (savedTheme === "color") setColorModeState(true);
 
     setLoaded(true);
   }, []);
 
+  // Sync colorMode state with next-themes hook
   useEffect(() => {
-    if (loaded) {
-      if (colorMode) {
-        document.documentElement.classList.add("color-theme");
-        localStorage.setItem("lifeos_theme", "color");
-      } else {
-        document.documentElement.classList.remove("color-theme");
-        localStorage.setItem("lifeos_theme", "day");
-      }
-    }
-  }, [colorMode, loaded]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    setColorModeState(theme === "color");
+  }, [theme]);
 
   const setName = (val: string) => {
     setNameState(val);
@@ -74,6 +69,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   };
 
   const setColorMode = (val: boolean) => {
+    setTheme(val ? "color" : "day");
     setColorModeState(val);
   };
 

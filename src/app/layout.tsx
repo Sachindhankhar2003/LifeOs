@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Space_Grotesk, Oswald } from "next/font/google";
 import "./globals.css";
 import { ServiceWorkerCleaner } from "@/components/ServiceWorkerCleaner";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const oswald = Oswald({
+  variable: "--font-gothic",
   subsets: ["latin"],
 });
 
@@ -24,12 +25,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} min-h-screen bg-white text-slate-900 font-sans antialiased`}
+        className={`${spaceGrotesk.variable} ${oswald.variable} font-sans antialiased bg-background text-foreground`}
       >
-        <ServiceWorkerCleaner />
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="day"
+          themes={["day", "color"]}
+        >
+          <ServiceWorkerCleaner />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

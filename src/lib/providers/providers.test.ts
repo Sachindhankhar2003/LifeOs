@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { getLocalWeather, getExchangeRates, getCached, setCached, clearCache } from './index';
+import { getLocalWeather, getExchangeRates, clearCache } from './index';
 
 // Mock fetch globally
 global.fetch = vi.fn();

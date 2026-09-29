@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { GET, POST } from '@/app/api/reminders/route';
 import { PUT, DELETE } from '@/app/api/reminders/[id]/route';

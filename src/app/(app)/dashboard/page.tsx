@@ -1,6 +1,7 @@
 "use client";
 import { cardStyle, tagStyle, SectionHeader } from '@/components/figma-ui';
 import { useUser } from '@/lib/UserContext';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 export default function DashboardPage() {
   const { name } = useUser();
@@ -12,7 +13,7 @@ export default function DashboardPage() {
       {/* Header */}
       <div style={{ marginBottom: 40 }}>
         <p style={{ fontSize: 12.5, color: 'var(--muted-foreground)', margin: 0, marginBottom: 6, letterSpacing: '0.04em', textTransform: 'uppercase', fontWeight: 500 }}>{dateStr}</p>
-        <h1 style={{ fontFamily: 'var(--font-cursive)', fontSize: 44, margin: 0, fontWeight: 600, color: 'var(--foreground)', lineHeight: 1.1 }}>
+        <h1 style={{ fontFamily: 'var(--font-sans)', fontSize: 44, margin: 0, fontWeight: 600, color: 'var(--foreground)', lineHeight: 1.1 }}>
           Good morning, {name.split(' ')[0]}.
         </h1>
         <p style={{ fontSize: 14.5, color: 'var(--muted-foreground)', margin: '10px 0 0', lineHeight: 1.5 }}>
@@ -30,10 +31,38 @@ export default function DashboardPage() {
         ].map(stat => (
           <div key={stat.label} style={cardStyle}>
             <p style={{ fontSize: 11.5, color: 'var(--muted-foreground)', margin: '0 0 10px', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 500 }}>{stat.label}</p>
-            <p style={{ fontSize: 26, fontFamily: 'var(--font-cursive)', margin: '0 0 6px', color: 'var(--foreground)', lineHeight: 1 }}>{stat.value}</p>
+            <p style={{ fontSize: 26, fontFamily: 'var(--font-sans)', margin: '0 0 6px', color: 'var(--foreground)', lineHeight: 1 }}>{stat.value}</p>
             <p style={{ fontSize: 12, color: '#4338ca', margin: 0, fontWeight: 500 }}>{stat.delta}</p>
           </div>
         ))}
+      </div>
+
+      {/* Graph Row */}
+      <div style={{ ...cardStyle, marginBottom: 20 }}>
+        <SectionHeader title="Activity & Momentum" />
+        <div style={{ height: 250, width: '100%', marginTop: 20 }}>
+          <ResponsiveContainer width="100%" height="100%">
+            <LineChart data={[
+              { name: 'Mon', decisions: 2, insights: 1 },
+              { name: 'Tue', decisions: 4, insights: 2 },
+              { name: 'Wed', decisions: 3, insights: 5 },
+              { name: 'Thu', decisions: 7, insights: 3 },
+              { name: 'Fri', decisions: 4, insights: 6 },
+              { name: 'Sat', decisions: 8, insights: 4 },
+              { name: 'Sun', decisions: 6, insights: 7 },
+            ]}>
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" vertical={false} />
+              <XAxis dataKey="name" stroke="var(--muted)" fontSize={12} tickLine={false} axisLine={false} />
+              <YAxis stroke="var(--muted)" fontSize={12} tickLine={false} axisLine={false} />
+              <Tooltip 
+                contentStyle={{ backgroundColor: 'var(--card)', borderColor: 'var(--border)', borderRadius: 8, color: 'var(--foreground)' }}
+                itemStyle={{ color: 'var(--foreground)' }}
+              />
+              <Line type="monotone" dataKey="decisions" name="Decisions" stroke="var(--primary)" strokeWidth={3} dot={{ r: 4, fill: 'var(--background)', strokeWidth: 2 }} activeDot={{ r: 6 }} />
+              <Line type="monotone" dataKey="insights" name="AI Insights" stroke="var(--secondary)" strokeWidth={3} dot={{ r: 4, fill: 'var(--background)', strokeWidth: 2 }} activeDot={{ r: 6 }} />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
       </div>
 
       {/* Two columns */}

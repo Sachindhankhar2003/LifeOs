@@ -18,7 +18,7 @@ export default function GoalsPage() {
     <div style={{ padding: '40px 48px' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 36 }}>
         <div>
-          <h2 style={{ fontFamily: 'var(--font-cursive)', fontSize: 38, margin: 0, fontWeight: 600 }}>Goals & Plans</h2>
+          <h2 style={{ fontFamily: 'var(--font-sans)', fontSize: 38, margin: 0, fontWeight: 600 }}>Goals & Plans</h2>
           <p style={{ fontSize: 14, color: 'var(--muted-foreground)', margin: '8px 0 0' }}>{goals.length} active goals</p>
         </div>
         <button 
@@ -33,7 +33,7 @@ export default function GoalsPage() {
           borderRadius: 6,
           fontSize: 13.5,
           cursor: 'pointer',
-          fontFamily: 'var(--font-cursive)',
+          fontFamily: 'var(--font-sans)',
           fontWeight: 500,
         }}>+ New Goal</button>
       </div>
@@ -62,7 +62,7 @@ export default function GoalsPage() {
             <div style={{ marginBottom: 10 }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6 }}>
                 <span style={{ fontSize: 12, color: 'var(--muted-foreground)' }}>Progress</span>
-                <span style={{ fontSize: 12, fontFamily: 'var(--font-cursive)', color: 'var(--foreground)', fontWeight: 500 }}>{g.progress}%</span>
+                <span style={{ fontSize: 12, fontFamily: 'var(--font-sans)', color: 'var(--foreground)', fontWeight: 500 }}>{g.progress}%</span>
               </div>
               <div style={{ height: 4, background: '#f0f0f0', borderRadius: 2 }}>
                 <div style={{ height: '100%', width: `${g.progress}%`, background: g.status === 'at-risk' ? '#f97316' : 'var(--foreground)', borderRadius: 2 }} />

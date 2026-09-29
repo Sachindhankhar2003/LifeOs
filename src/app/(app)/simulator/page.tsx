@@ -44,7 +44,7 @@ export default function SimulatorPage() {
   return (
     <div style={{ padding: '40px 48px' }}>
       <div style={{ marginBottom: 36 }}>
-        <h2 style={{ fontFamily: 'var(--font-cursive)', fontSize: 44, margin: 0, fontWeight: 600 }}>What If Simulator</h2>
+        <h2 style={{ fontFamily: 'var(--font-sans)', fontSize: 44, margin: 0, fontWeight: 600 }}>What If Simulator</h2>
         <p style={{ fontSize: 15, color: 'var(--muted-foreground)', margin: '8px 0 0' }}>Ask a hypothetical question and receive AI-generated scenario projections.</p>
       </div>
 
@@ -134,7 +134,7 @@ export default function SimulatorPage() {
               <div key={o.label}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 7 }}>
                   <span style={{ fontSize: 13.5, fontWeight: 450, color: 'var(--foreground)' }}>{o.label}</span>
-                  <span style={{ fontSize: 13, color: '#4338ca', fontFamily: 'var(--font-cursive)', fontWeight: 500 }}>{o.value}%</span>
+                  <span style={{ fontSize: 13, color: '#4338ca', fontFamily: 'var(--font-sans)', fontWeight: 500 }}>{o.value}%</span>
                 </div>
                 <div style={{ height: 5, background: '#f0f0f0', borderRadius: 3 }}>
                   <div style={{ height: '100%', width: `${o.value}%`, background: '#4338ca', borderRadius: 3, transition: 'width 0.6s ease' }} />

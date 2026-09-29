@@ -28,20 +28,20 @@ export default async function AdminLayout({
   return (
     <div className="min-h-screen bg-slate-50 flex">
       {/* Sidebar */}
-      <div className="w-64 bg-white border-r border-slate-200 flex flex-col pt-6 shrink-0 h-screen sticky top-0 overflow-y-auto hidden md:flex">
+      <div className="w-64 bg-[var(--card)] border-r border-[var(--border)] flex flex-col pt-6 shrink-0 h-screen sticky top-0 overflow-y-auto hidden md:flex">
         <div className="px-6 mb-8 flex items-center gap-2">
-          <Shield className="w-6 h-6 text-slate-900" />
-          <span className="font-bold tracking-tight text-lg text-slate-900">LifeOS Admin</span>
+          <Shield className="w-6 h-6 text-[var(--foreground)]" />
+          <span className="font-bold tracking-tight text-lg text-[var(--foreground)]">LifeOS Admin</span>
         </div>
         
         <nav className="flex-1 px-4 space-y-1">
-          <Link href="/admin" className="block px-4 py-2.5 text-sm font-medium text-slate-700 rounded-xl hover:bg-slate-50 hover:text-slate-900 transition-colors">
+          <Link href="/admin" className="block px-4 py-2.5 text-sm font-medium text-[var(--foreground)] rounded-xl hover:bg-[var(--surface-secondary)] hover:text-[var(--foreground)] transition-colors">
             Overview
           </Link>
-          <Link href="/admin/users" className="block px-4 py-2.5 text-sm font-medium text-slate-700 rounded-xl hover:bg-slate-50 hover:text-slate-900 transition-colors">
+          <Link href="/admin/users" className="block px-4 py-2.5 text-sm font-medium text-[var(--foreground)] rounded-xl hover:bg-[var(--surface-secondary)] hover:text-[var(--foreground)] transition-colors">
             Users & Roles
           </Link>
-          <Link href="/dashboard" className="block px-4 py-2.5 text-sm font-medium text-slate-500 rounded-xl hover:bg-slate-50 hover:text-slate-700 transition-colors mt-8">
+          <Link href="/dashboard" className="block px-4 py-2.5 text-sm font-medium text-[var(--muted)] rounded-xl hover:bg-[var(--surface-secondary)] hover:text-[var(--foreground)] transition-colors mt-8">
             ← Back to App
           </Link>
         </nav>

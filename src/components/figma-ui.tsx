@@ -5,17 +5,19 @@ import React, { useState } from "react";
 
 export const cardStyle: React.CSSProperties = {
   padding: '20px 22px',
-  border: '1px solid #e8e8e8',
-  borderRadius: 8,
-  background: '#fff',
+  border: '1px solid var(--border)',
+  borderRadius: 'var(--radius)',
+  background: 'var(--card)',
+  color: 'var(--foreground)',
+  boxShadow: 'var(--shadow)',
 }
 
 export const tagStyle: React.CSSProperties = {
   fontSize: 11.5,
   padding: '3px 8px',
-  borderRadius: 12,
-  background: '#f0f0f0',
-  color: '#737373',
+  borderRadius: 'var(--radius)',
+  background: 'var(--surface-secondary)',
+  color: 'var(--secondary)',
   fontWeight: 500,
   whiteSpace: 'nowrap',
   flexShrink: 0,
@@ -26,8 +28,8 @@ export const tagStyle: React.CSSProperties = {
 export function SectionHeader({ title, action }: { title: string; action?: string }) {
   return (
     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
-      <h3 style={{ margin: 0, fontSize: 13.5, fontWeight: 600, color: '#0f0f0f' }}>{title}</h3>
-      {action && <button style={{ fontSize: 12.5, color: '#4338ca', background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'var(--font-cursive)', fontWeight: 500 }}>{action} →</button>}
+      <h3 style={{ margin: 0, fontSize: 13.5, fontWeight: 600, color: 'var(--foreground)' }}>{title}</h3>
+      {action && <button style={{ fontSize: 12.5, color: 'var(--primary)', background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'var(--font-sans)', fontWeight: 500 }}>{action} →</button>}
     </div>
   )
 }
@@ -35,7 +37,7 @@ export function SectionHeader({ title, action }: { title: string; action?: strin
 export function SettingsSection({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div>
-      <h3 style={{ margin: '0 0 16px', fontSize: 14, fontWeight: 600, color: '#0f0f0f', paddingBottom: 10, borderBottom: '1px solid #e8e8e8' }}>{title}</h3>
+      <h3 style={{ margin: '0 0 16px', fontSize: 14, fontWeight: 600, color: 'var(--foreground)', paddingBottom: 10, borderBottom: '1px solid var(--border)' }}>{title}</h3>
       {children}
     </div>
   )
@@ -44,7 +46,7 @@ export function SettingsSection({ title, children }: { title: string; children: 
 export function FieldGroup({ label, value, type = 'text', onChange }: { label: string; value: string; type?: string; onChange?: (val: string) => void }) {
   return (
     <div>
-      <label style={{ fontSize: 12, fontWeight: 500, color: '#a3a3a3', display: 'block', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.04em' }}>{label}</label>
+      <label style={{ fontSize: 12, fontWeight: 500, color: 'var(--muted)', display: 'block', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.04em' }}>{label}</label>
       <input
         value={value}
         onChange={e => onChange?.(e.target.value)}
@@ -52,13 +54,13 @@ export function FieldGroup({ label, value, type = 'text', onChange }: { label: s
         style={{
           width: '100%',
           padding: '9px 12px',
-          border: '1px solid var(--border)',
+          border: '1px solid var(--input-border)',
           borderRadius: 6,
           fontSize: 13.5,
-          fontFamily: 'var(--font-cursive)',
+          fontFamily: 'var(--font-sans)',
           color: 'var(--foreground)',
           outline: 'none',
-          background: 'var(--card)',
+          background: 'var(--input-background)',
         }}
       />
     </div>
@@ -76,7 +78,7 @@ export function ToggleSwitch({ on, onChange }: { on: boolean; onChange?: (val: b
         width: 40,
         height: 22,
         borderRadius: 11,
-        background: active ? '#3b82f6' : '#e8e8e8',
+        background: active ? 'var(--primary)' : 'var(--border)',
         border: 'none',
         cursor: 'pointer',
         position: 'relative',

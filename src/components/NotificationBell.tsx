@@ -66,18 +66,18 @@ export default function NotificationBell() {
     <div className="relative" ref={containerRef}>
       <button 
         onClick={() => setIsOpen(!isOpen)}
-        className="w-10 h-10 rounded-xl hover:bg-slate-100 flex items-center justify-center relative transition-colors"
+        className="w-10 h-10 rounded-xl hover:bg-[var(--surface-secondary)] flex items-center justify-center relative transition-colors"
       >
-        <Bell className="w-5 h-5 text-slate-600" />
+        <Bell className="w-5 h-5 text-[var(--muted)]" />
         {unreadCount > 0 && (
           <span className="absolute top-2 right-2 w-2.5 h-2.5 bg-blue-600 border-2 border-white rounded-full"></span>
         )}
       </button>
 
       {isOpen && (
-        <div className="absolute bottom-full mb-2 sm:bottom-auto sm:mb-0 sm:top-12 left-0 sm:-left-32 w-80 bg-white border border-slate-200 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.08)] overflow-hidden z-50 animate-in fade-in zoom-in-95 duration-200">
-          <div className="p-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
-            <h3 className="font-semibold text-slate-900">Notifications</h3>
+        <div className="absolute bottom-full mb-2 sm:bottom-auto sm:mb-0 sm:top-12 left-0 sm:-left-32 w-80 bg-[var(--card)] border border-[var(--border)] rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.08)] overflow-hidden z-50 animate-in fade-in zoom-in-95 duration-200">
+          <div className="p-4 border-b border-[var(--border)] flex items-center justify-between bg-slate-50/50">
+            <h3 className="font-semibold text-[var(--foreground)]">Notifications</h3>
             {unreadCount > 0 && (
               <button 
                 onClick={() => markAsRead()}
@@ -91,30 +91,30 @@ export default function NotificationBell() {
           <div className="max-h-80 overflow-y-auto">
             {notifications.length === 0 ? (
               <div className="p-8 text-center">
-                <Bell className="w-8 h-8 text-slate-300 mx-auto mb-3" />
-                <p className="text-sm font-medium text-slate-900">All caught up</p>
-                <p className="text-xs text-slate-500 mt-1">Check back later for updates</p>
+                <Bell className="w-8 h-8 text-[var(--border)] mx-auto mb-3" />
+                <p className="text-sm font-medium text-[var(--foreground)]">All caught up</p>
+                <p className="text-xs text-[var(--muted)] mt-1">Check back later for updates</p>
               </div>
             ) : (
               <div className="divide-y divide-slate-100">
                 {notifications.map((notif) => (
-                  <div key={notif.id} className={`p-4 flex items-start gap-4 hover:bg-slate-50 transition-colors ${!notif.isRead ? 'bg-blue-50/20' : ''}`}>
+                  <div key={notif.id} className={`p-4 flex items-start gap-4 hover:bg-[var(--surface-secondary)] transition-colors ${!notif.isRead ? 'bg-blue-50/20' : ''}`}>
                     <div className="shrink-0 mt-1">
                       {!notif.isRead ? (
                         <div className="w-2 h-2 rounded-full bg-blue-600"></div>
                       ) : (
-                        <CheckCircle2 className="w-4 h-4 text-slate-300" />
+                        <CheckCircle2 className="w-4 h-4 text-[var(--border)]" />
                       )}
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className={`text-sm font-medium ${!notif.isRead ? 'text-slate-900' : 'text-slate-700'}`}>
+                      <p className={`text-sm font-medium ${!notif.isRead ? 'text-[var(--foreground)]' : 'text-[var(--foreground)]'}`}>
                         {notif.title}
                       </p>
-                      <p className="text-sm text-slate-500 mt-0.5 line-clamp-2">
+                      <p className="text-sm text-[var(--muted)] mt-0.5 line-clamp-2">
                         {notif.message}
                       </p>
                       <div className="flex items-center gap-3 mt-2">
-                        <span className="text-xs text-slate-400 font-medium">
+                        <span className="text-xs text-[var(--muted)] font-medium">
                           {formatDistanceToNow(new Date(notif.createdAt), { addSuffix: true })}
                         </span>
                         {notif.link && (
@@ -123,7 +123,7 @@ export default function NotificationBell() {
                           </Link>
                         )}
                         {!notif.isRead && !notif.link && (
-                          <button onClick={() => markAsRead(notif.id)} className="text-xs font-medium text-slate-500 hover:text-slate-700 ml-auto flex items-center gap-1">
+                          <button onClick={() => markAsRead(notif.id)} className="text-xs font-medium text-[var(--muted)] hover:text-[var(--foreground)] ml-auto flex items-center gap-1">
                             <Check className="w-3 h-3" /> Read
                           </button>
                         )}

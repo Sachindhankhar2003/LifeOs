@@ -60,7 +60,7 @@ export default function ClientLayout({ children }: { children: ReactNode }) {
             </svg>
           </div>
           {!collapsed && (
-            <span style={{ fontFamily: 'var(--font-cursive)', fontSize: 24, letterSpacing: '0', color: 'var(--foreground)' }}>
+            <span style={{ fontFamily: 'var(--font-sans)', fontSize: 24, letterSpacing: '0', color: 'var(--foreground)', fontWeight: 600 }}>
               LifeOS
             </span>
           )}
@@ -107,8 +107,8 @@ export default function ClientLayout({ children }: { children: ReactNode }) {
                   background: active ? bgVar : 'transparent',
                   color: active ? textVar : 'var(--muted-foreground)',
                   fontSize: 13.5,
-                  fontFamily: 'var(--font-cursive)',
-                  fontWeight: active ? 500 : 400,
+                  fontFamily: 'var(--font-sans)',
+                  fontWeight: active ? 600 : 500,
                   textAlign: 'left',
                   transition: 'all 0.15s ease',
                   whiteSpace: 'nowrap',
@@ -168,13 +168,13 @@ export default function ClientLayout({ children }: { children: ReactNode }) {
 
       {/* Main Content */}
       <main style={{ flex: 1, overflow: 'auto', background: 'var(--background)', display: 'flex', flexDirection: 'column' }}>
-        <header className="h-16 lg:hidden flex items-center justify-between px-4 border-b border-slate-200 bg-white shrink-0">
+        <header className="h-16 lg:hidden flex items-center justify-between px-4" style={{borderBottom: '1px solid var(--border)', background: 'var(--background)'}}>
           <div className="flex items-center">
-             <span className="font-medium text-slate-900 ml-2 font-serif text-lg tracking-tight">LifeOS</span>
+             <span className="font-medium ml-2 tracking-tight" style={{fontFamily: 'var(--font-sans)', color: 'var(--foreground)'}}>LifeOS</span>
           </div>
           {/* We hide NotificationBell intentionally since Figma didn't use it, but keeping here just in case */}
           <div className="hidden"><NotificationBell /></div>
-          <button onClick={() => setCollapsed(!collapsed)} className="p-2 border border-slate-200 rounded">Menu</button>
+          <button onClick={() => setCollapsed(!collapsed)} className="p-2 rounded" style={{border: '1px solid var(--border)', color: 'var(--foreground)', background: 'transparent'}}>Menu</button>
         </header>
 
         <div style={{ flex: 1, overflow: 'auto' }}>

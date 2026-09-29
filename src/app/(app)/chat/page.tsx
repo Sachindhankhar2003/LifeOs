@@ -38,7 +38,7 @@ export default function ChatPage() {
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       {/* Header */}
       <div style={{ padding: '28px 40px 20px', borderBottom: '1px solid var(--border)', flexShrink: 0 }}>
-        <h2 style={{ fontFamily: 'var(--font-cursive)', fontSize: 38, margin: 0, fontWeight: 600 }}>Ask LifeOS</h2>
+        <h2 style={{ fontFamily: 'var(--font-sans)', fontSize: 38, margin: 0, fontWeight: 600 }}>Ask LifeOS</h2>
         <p style={{ fontSize: 13.5, color: 'var(--muted-foreground)', margin: '6px 0 0' }}>AI-powered thinking partner for decisions, planning, and reflection.</p>
       </div>
 
@@ -122,7 +122,7 @@ export default function ChatPage() {
               outline: 'none',
               resize: 'none',
               fontSize: 14,
-              fontFamily: 'var(--font-cursive)',
+              fontFamily: 'var(--font-sans)',
               color: 'var(--foreground)',
               background: 'transparent',
               lineHeight: 1.5,

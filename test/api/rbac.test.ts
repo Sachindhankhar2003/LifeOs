@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { PUT } from '@/app/api/admin/users/[id]/route';
 import { NextRequest } from 'next/server';

@@ -1,5 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { getCached, setCached } from "./cache";
-
 interface WeatherResult {
   temperature_2m: number;
   apparent_temperature: number;

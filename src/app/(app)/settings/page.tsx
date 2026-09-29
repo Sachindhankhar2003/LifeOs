@@ -4,15 +4,27 @@ import { cardStyle, SettingsSection, FieldGroup, ToggleSwitch } from "@/componen
 import { useUser } from "@/lib/UserContext";
 
 export default function SettingsPage() {
-  const [tab, setTab] = useState('Account')
+  const [tab, setTab] = useState('Account');
+  const [showToast, setShowToast] = useState(false);
   const tabs = ['Account', 'AI Preferences', 'Appearance', 'Privacy', 'Notifications']
   const { name, setName, email, setEmail, age, setAge, location: userLocation, setLocation, colorMode, setColorMode } = useUser();
 
   return (
     <div style={{ padding: '40px 48px', maxWidth: 760 }}>
-      <div style={{ marginBottom: 32 }}>
-        <h2 style={{ fontFamily: 'var(--font-cursive)', fontSize: 44, margin: 0, fontWeight: 600, color: 'var(--foreground)' }}>Settings</h2>
+      <div style={{ marginBottom: 32, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <h2 style={{ fontFamily: 'var(--font-gothic)', fontSize: 44, margin: 0, fontWeight: 600, color: 'var(--foreground)' }}>Settings</h2>
       </div>
+
+      {showToast && (
+        <div style={{
+          position: 'fixed', bottom: 40, right: 40, background: 'var(--success)', color: '#fff',
+          padding: '12px 24px', borderRadius: 8, fontWeight: 500, fontSize: 14, 
+          boxShadow: '0 8px 16px rgba(16, 185, 129, 0.2)', zIndex: 9999,
+          animation: 'slideUp 0.3s ease-out'
+        }}>
+          ✓ Settings Successfully Saved!
+        </div>
+      )}
 
       {/* Tabs */}
       <div style={{ display: 'flex', gap: 0, borderBottom: '1px solid var(--border)', marginBottom: 32 }}>
@@ -26,7 +38,7 @@ export default function SettingsPage() {
             fontSize: 13.5,
             fontWeight: tab === t ? 500 : 400,
             color: tab === t ? 'var(--foreground)' : 'var(--muted-foreground)',
-            fontFamily: 'var(--font-cursive)',
+            fontFamily: 'var(--font-sans)',
             marginBottom: -1,
             transition: 'color 0.12s',
           }}>{t}</button>
@@ -42,18 +54,31 @@ export default function SettingsPage() {
               <FieldGroup label="Age" value={age} onChange={setAge} />
               <FieldGroup label="Location" value={userLocation} onChange={setLocation} />
             </div>
+            <div style={{ marginTop: 24, display: 'flex', justifyContent: 'flex-end' }}>
+              <button 
+                onClick={() => { setShowToast(true); setTimeout(() => setShowToast(false), 3000); }}
+                style={{
+                  padding: '10px 24px', background: 'var(--primary)', color: '#fff', border: 'none', borderRadius: 8,
+                  cursor: 'pointer', fontFamily: 'var(--font-sans)', fontWeight: 500, transition: 'background 0.2s'
+                }}
+                onMouseOver={(e) => (e.currentTarget.style.background = 'var(--primary-hover)')}
+                onMouseOut={(e) => (e.currentTarget.style.background = 'var(--primary)')}
+              >
+                Save Changes
+              </button>
+            </div>
           </SettingsSection>
           <SettingsSection title="Password & Security">
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
               <FieldGroup label="Current Password" value="" type="password" />
               <FieldGroup label="New Password" value="" type="password" />
-              <button style={{ alignSelf: 'flex-start', padding: '9px 18px', background: 'var(--foreground)', color: 'var(--background)', border: 'none', borderRadius: 6, cursor: 'pointer', fontSize: 13.5, fontFamily: 'var(--font-cursive)', fontWeight: 500 }}>Update Password</button>
+              <button style={{ alignSelf: 'flex-start', padding: '9px 18px', background: 'var(--foreground)', color: 'var(--background)', border: 'none', borderRadius: 6, cursor: 'pointer', fontSize: 13.5, fontFamily: 'var(--font-sans)', fontWeight: 500 }}>Update Password</button>
             </div>
           </SettingsSection>
           <SettingsSection title="Danger Zone">
             <div style={{ display: 'flex', gap: 12 }}>
-              <button style={{ padding: '9px 18px', border: '1px solid #fca5a5', borderRadius: 6, background: '#fff7f7', cursor: 'pointer', fontSize: 13.5, color: '#dc2626', fontFamily: 'var(--font-cursive)' }}>Delete Account</button>
-              <button style={{ padding: '9px 18px', border: '1px solid var(--border)', borderRadius: 6, background: 'var(--card)', cursor: 'pointer', fontSize: 13.5, color: 'var(--muted-foreground)', fontFamily: 'var(--font-cursive)' }}>Export Data</button>
+              <button style={{ padding: '9px 18px', border: '1px solid #fca5a5', borderRadius: 6, background: '#fff7f7', cursor: 'pointer', fontSize: 13.5, color: '#dc2626', fontFamily: 'var(--font-sans)' }}>Delete Account</button>
+              <button style={{ padding: '9px 18px', border: '1px solid var(--border)', borderRadius: 6, background: 'var(--card)', cursor: 'pointer', fontSize: 13.5, color: 'var(--muted-foreground)', fontFamily: 'var(--font-sans)' }}>Export Data</button>
             </div>
           </SettingsSection>
         </div>
@@ -94,12 +119,95 @@ export default function SettingsPage() {
       {tab === 'Appearance' && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
           <SettingsSection title="Theme Preferences">
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: 16, borderBottom: '1px solid var(--border)' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
               <div>
-                <div style={{ fontSize: 14, fontWeight: 450, color: 'var(--foreground)' }}>Color Mode</div>
-                <div style={{ fontSize: 12.5, color: 'var(--muted-foreground)', marginTop: 3 }}>Toggle between Day Theme (minimal) and Color Theme (vibrant & creative)</div>
+                <div style={{ fontSize: 14, fontWeight: 500, color: 'var(--foreground)' }}>Color Mode</div>
+                <div style={{ fontSize: 13, color: 'var(--muted-foreground)', marginTop: 4 }}>
+                  Select your LifeOS interface theme
+                </div>
               </div>
-              <ToggleSwitch on={colorMode} onChange={setColorMode} />
+
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 16 }}>
+                {/* Day Mode Option */}
+                <div 
+                  onClick={() => setColorMode(false)}
+                  style={{
+                    border: !colorMode ? '2px solid var(--primary)' : '1px solid var(--border)',
+                    borderRadius: 8,
+                    padding: 16,
+                    cursor: 'pointer',
+                    background: 'var(--surface)',
+                    opacity: !colorMode ? 1 : 0.7,
+                    transition: 'all 0.2s',
+                  }}
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
+                    <div style={{ fontWeight: 500, color: 'var(--foreground)', display: 'flex', alignItems: 'center', gap: 8 }}>
+                      <span>☀️</span> Day
+                    </div>
+                    <ToggleSwitch on={!colorMode} onChange={() => setColorMode(false)} />
+                  </div>
+                  
+                  {/* Theme Preview */}
+                  <div style={{ 
+                    background: '#FFFFFF', 
+                    borderRadius: 6, 
+                    border: '1px solid #E5E7EB',
+                    height: 80,
+                    padding: 8,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 6
+                  }}>
+                    <div style={{ height: 8, width: '40%', background: '#E5E7EB', borderRadius: 4 }}></div>
+                    <div style={{ height: 30, width: '100%', background: '#F8FAFC', borderRadius: 4, display: 'flex', gap: 4, padding: 4 }}>
+                      <div style={{ flex: 1, background: '#FFFFFF', borderRadius: 2, boxShadow: '0 1px 2px rgba(0,0,0,0.05)' }}></div>
+                      <div style={{ flex: 2, background: '#EEF0FF', borderRadius: 2 }}></div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Color Mode Option */}
+                <div 
+                  onClick={() => setColorMode(true)}
+                  style={{
+                    border: colorMode ? '2px solid var(--primary)' : '1px solid var(--border)',
+                    borderRadius: 8,
+                    padding: 16,
+                    cursor: 'pointer',
+                    background: 'var(--surface)',
+                    opacity: colorMode ? 1 : 0.7,
+                    transition: 'all 0.2s',
+                  }}
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
+                    <div style={{ fontWeight: 500, color: 'var(--foreground)', display: 'flex', alignItems: 'center', gap: 8 }}>
+                      <span>🌈</span> Color
+                    </div>
+                    <ToggleSwitch on={colorMode} onChange={() => setColorMode(true)} />
+                  </div>
+                  
+                  {/* Theme Preview */}
+                  <div style={{ 
+                    background: 'radial-gradient(circle at 10% 0%, #26184a 0%, #0f0a1c 60%)', 
+                    borderRadius: 6, 
+                    border: '1px solid rgba(139, 92, 246, 0.4)',
+                    height: 80,
+                    padding: 8,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 6
+                  }}>
+                    <div style={{ height: 8, width: '40%', background: 'rgba(167, 139, 250, 0.6)', borderRadius: 4 }}></div>
+                    <div style={{ height: 30, width: '100%', background: 'rgba(26, 20, 49, 0.7)', borderRadius: 4, display: 'flex', gap: 4, padding: 4 }}>
+                      <div style={{ flex: 1, background: '#1a1431', borderRadius: 2, boxShadow: '0 4px 8px rgba(139,92,246,0.3)' }}></div>
+                      <div style={{ flex: 2, background: 'linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%)', borderRadius: 2 }}></div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
             </div>
           </SettingsSection>
         </div>
@@ -116,8 +224,8 @@ export default function SettingsPage() {
               ].map(pref => (
                 <div key={pref.label} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: 16, borderBottom: '1px solid #f0f0f0' }}>
                   <div>
-                    <div style={{ fontSize: 14, fontWeight: 450, color: '#0f0f0f' }}>{pref.label}</div>
-                    <div style={{ fontSize: 12.5, color: '#a3a3a3', marginTop: 3 }}>{pref.desc}</div>
+                    <div style={{ fontSize: 14, fontWeight: 450, color: 'var(--foreground)' }}>{pref.label}</div>
+                    <div style={{ fontSize: 12.5, color: 'var(--muted)', marginTop: 3 }}>{pref.desc}</div>
                   </div>
                   <ToggleSwitch on={pref.on} />
                 </div>
@@ -128,7 +236,7 @@ export default function SettingsPage() {
       )}
 
       {(tab === 'Notifications' || tab === 'Integrations') && (
-        <div style={{ ...cardStyle, textAlign: 'center', padding: '48px 24px', color: '#a3a3a3' }}>
+        <div style={{ ...cardStyle, textAlign: 'center', padding: '48px 24px', color: 'var(--muted)' }}>
           <div style={{ fontSize: 32, marginBottom: 12 }}>○</div>
           <p style={{ fontSize: 14 }}>{tab} settings coming soon.</p>
         </div>

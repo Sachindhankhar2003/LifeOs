@@ -103,3 +103,6 @@ LifeOS backend API capabilities are ensured via automated unit tests driven by V
 ```bash
 npx vitest run
 ```
+
+## Contributing
+Contributions are always welcome. Please feel free to open a pull request or add an issue.
